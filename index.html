@@ -1,39 +1,238 @@
 <!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <title>Nicolas Petrides — Portfolio</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Nicolas Petrides is an Oregon State student in Data Science and Finance who builds and publishes iOS apps and finance models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-       max-width:42rem;margin:4rem auto;padding:0 1.5rem;color:#1a1a1a}
-  a{color:#3b5bdb}
-  nav a{margin-right:1rem}
+:root{
+  --paper:#F2F4F7; --ink:#101828; --slate:#566174; --rule:#D5DBE5;
+  --cobalt:#1F4FE0; --mark:#FFE27A; --white:#FFFFFF;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:1.0625rem/1.7 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:var(--cobalt);text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:2px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:10;background:rgba(242,244,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:3.5rem}
+.bar .mark{font:800 1rem var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.bar nav{display:flex;gap:1.25rem;flex-wrap:wrap;font:500 .9375rem var(--sans)}
+.bar nav a{color:var(--slate);text-decoration:none;padding:.25rem 0}
+.bar nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:.35em}
+
+/* hero */
+.hero{padding-top:5rem;padding-bottom:3.5rem}
+h1{font:800 clamp(3rem,10vw,7.25rem)/.92 var(--sans);letter-spacing:-.045em;margin:0 0 1.5rem}
+.tagline{font:500 clamp(1.15rem,2.4vw,1.5rem)/1.4 var(--sans);color:var(--slate);margin:0 0 3rem;max-width:36rem}
+.summary{margin:0;border-top:2px solid var(--ink)}
+.summary div{display:grid;grid-template-columns:11rem 1fr;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--rule)}
+.summary dt{font:500 .9375rem var(--sans);color:var(--slate)}
+.summary dd{margin:0;font:500 1.0625rem/1.5 var(--sans)}
+@media (prefers-reduced-motion:no-preference){
+  .summary div{animation:row .6s cubic-bezier(.2,.7,.2,1) both}
+  .summary div:nth-child(2){animation-delay:.08s}
+  .summary div:nth-child(3){animation-delay:.16s}
+  .summary div:nth-child(4){animation-delay:.24s}
+  @keyframes row{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+
+/* sections */
+section{padding:3.5rem 0;border-top:1px solid var(--rule)}
+.grid{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:2rem 3rem}
+h2{font:800 1.5rem/1.2 var(--sans);letter-spacing:-.02em;margin:0}
+h3{font:700 1.0625rem/1.3 var(--sans);margin:0 0 .6rem}
+.prose{max-width:38rem}
+.prose p{margin:0 0 1.15rem}
+.prose p:last-child{margin-bottom:0}
+
+/* skills */
+.skillgroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:2rem}
+.skillgroups ul{list-style:none;margin:0;padding:0;font:400 1rem/1.5 var(--sans)}
+.skillgroups li{padding:.45rem 0;border-bottom:1px solid var(--rule)}
+
+/* projects */
+.sub{margin:2.5rem 0 1rem}
+.sub:first-child{margin-top:0}
+.sub p{margin:0;color:var(--slate);font:400 .9375rem/1.5 var(--sans)}
+.ledger{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 9.5rem;gap:1rem;padding:1.1rem 1.25rem;border-top:1px solid var(--rule);align-items:baseline}
+.row:first-child{border-top:0}
+.row .name{font:700 1.0625rem/1.3 var(--sans)}
+.row .what{font:400 .9375rem/1.55 var(--sans);color:var(--slate)}
+.row .fig{font:700 1rem/1.4 var(--sans);font-variant-numeric:tabular-nums;text-align:right}
+.row .fig span{display:inline-block;background:var(--mark);padding:0 .35em;margin:.1rem 0}
+.apps{list-style:none;margin:0;padding:0;columns:2;column-gap:2.5rem;font:400 1rem/1.5 var(--sans)}
+.apps li{break-inside:avoid;padding:.55rem 0;border-bottom:1px solid var(--rule)}
+.apps b{font-weight:700}
+.soon{font:400 1rem/1.7 var(--sans);color:var(--slate);margin:0;max-width:40rem}
+
+/* footer */
+footer{border-top:2px solid var(--ink);padding:2rem 0 3rem;font:400 .9375rem var(--sans);color:var(--slate)}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+footer a{margin-right:1.25rem}
+footer a:last-child{margin-right:0}
+
+@media (max-width:760px){
+  .hero{padding-top:3rem;padding-bottom:2.5rem}
+  .grid{grid-template-columns:1fr;gap:1.25rem}
+  .summary div{grid-template-columns:1fr;gap:.1rem}
+  .row{grid-template-columns:1fr;gap:.25rem}
+  .row .fig{text-align:left}
+  .apps{columns:1}
+  .bar nav{gap:.9rem;font-size:.875rem}
+  .bar .mark{display:none}
+}
 </style>
-<h1>Nicolas Petrides</h1>
-<p>iOS apps for learning, planning, and play.</p>
-<nav>
-  <a href="#bio">Bio</a>
-  <a href="#skills">Skills</a>
-  <a href="/projects.html">Projects</a>
-  <a href="/legal/">Privacy policies &amp; terms</a>
-</nav>
+</head>
+<body>
 
-<h2 id="bio">Bio</h2>
-<p>I am a sophomore at Oregon State University, majoring in Data Science and Finance with a minor in Actuarial Science. I hope to build a career that combines the skills I am learning from my majors. During college I developed an interest in coding, which led me to build my own solo projects outside of class and publish them on the Apple App Store. I was drawn to data science because I believe it is the future.</p>
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">Nicolas Petrides</a>
+    <nav aria-label="Sections">
+      <a href="#bio">Bio</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#goals">Where I'm Headed</a>
+      <a href="/legal/">Privacy policies &amp; terms</a>
+    </nav>
+  </div>
+</header>
 
-<h2 id="skills">Skills</h2>
-<ul>
-  <li>Python and data science coursework</li>
-  <li>Swift / SwiftUI app development</li>
-  <li>Microsoft Excel</li>
-  <li>Communication and personal conversations</li>
-  <li>Time management</li>
-</ul>
+<main id="top">
+  <div class="wrap hero">
+    <h1>Nicolas Petrides</h1>
+    <p class="tagline">iOS apps for learning, planning, and play.</p>
+    <dl class="summary">
+      <div><dt>School</dt><dd>Oregon State University, sophomore</dd></div>
+      <div><dt>Studying</dt><dd>Data Science and Finance, with a minor in Actuarial Science</dd></div>
+      <div><dt>Published</dt><dd>7 apps on the Apple App Store</dd></div>
+      <div><dt>Looking for</dt><dd>A summer internship in data science, finance, or actuarial work</dd></div>
+    </dl>
+  </div>
 
-<h2>Projects</h2>
-<p>See the <a href="/projects.html">projects page</a> (in progress).</p>
+  <section id="bio">
+    <div class="wrap grid">
+      <h2>Bio</h2>
+      <div class="prose">
+        <p>I am a sophomore at Oregon State University, majoring in Data Science and Finance with a minor in Actuarial Science. I hope to build a career that combines the skills I am learning from my majors. During college I developed an interest in coding, which led me to build my own solo projects outside of class and publish them on the Apple App Store. I was drawn to data science because I believe it is the future.</p>
+      </div>
+    </div>
+  </section>
 
-<h2 id="goals">Where I'm Headed</h2>
-<p>My goal is to build a career in data science, finance, or actuarial science, ideally one that lets me use all three to help people make better decisions with uncertain information. I am majoring in Data Science and Finance with a minor in Actuarial Science at Oregon State, and what connects them is a single question: how do you reason well when you cannot know what happens next?
-<p>I already practice this outside of class. I trade options, which means constantly estimating probabilities and sizing risk, and I have published several iOS apps on the App Store on my own. Building them taught me to take a messy idea all the way to a working product that real people use.
-<p>When I did the job scavenger hunt and my skills self-reflection in this course, the postings that interested me kept asking for Python, SQL, statistics, and the ability to explain results to people who are not technical. I am building Python and statistics through my coursework, and communication is the skill I want to push hardest, which is a big reason I am building this portfolio.
-<p>My short-term goal is to land an internship this summer in data science, finance, or actuarial work so I can see which field I am best at and enjoy most. Until then I will keep applying, keep improving my data science skills, and keep building apps. Longer term, I want to be the person who can both build the model and explain it to the people relying on it.
+  <section id="skills">
+    <div class="wrap grid">
+      <h2>Skills</h2>
+      <div class="skillgroups">
+        <div>
+          <h3>Build and analyze</h3>
+          <ul>
+            <li>Python and data science coursework</li>
+            <li>Swift / SwiftUI app development</li>
+            <li>Microsoft Excel</li>
+            <li>Financial models</li>
+            <li>Xcode</li>
+            <li>AI tools</li>
+            <li>Calculus</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Work with people</h3>
+          <ul>
+            <li>Communication and personal conversations</li>
+            <li>Public speaking</li>
+            <li>Time management</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Off the clock</h3>
+          <ul>
+            <li>Mountain biking</li>
+            <li>Skiing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap grid">
+      <h2>Projects</h2>
+      <div>
+        <div class="sub"><h3>Finance models</h3></div>
+        <div class="ledger">
+          <div class="row">
+            <div class="name">OpenText LBO model</div>
+            <div class="what">Leveraged buyout model.</div>
+            <div class="fig"><span>17.3% IRR</span><br><span>2.2x MOIC</span></div>
+          </div>
+          <div class="row">
+            <div class="name">Mondelez and Hershey merger model</div>
+            <div class="what">Merger model with accretion/dilution analysis.</div>
+            <div class="fig"><span>$64B deal</span></div>
+          </div>
+          <div class="row">
+            <div class="name">SpaceX IPO valuation</div>
+            <div class="what">Segmented DCF.</div>
+            <div class="fig"></div>
+          </div>
+          <div class="row">
+            <div class="name">Petrides Fund</div>
+            <div class="what">Hypothetical money market fund with an options overlay.</div>
+            <div class="fig"><span>$100M</span></div>
+          </div>
+        </div>
+
+        <div class="sub"><h3>Apps live on the App Store</h3></div>
+        <ul class="apps">
+          <li><b>SigmaQuest:</b> Learn Statistics</li>
+          <li><b>SignQuest:</b> Learn ASL</li>
+          <li><b>Glidepath:</b> ASTB-E Prep</li>
+          <li><b>Pourfolio:</b> Drink Journal</li>
+          <li><b>DailyHealth:</b> Private Diary</li>
+          <li><b>BlockBurst:</b> Block Puzzle</li>
+          <li><b>Matcha Shop Tycoon</b></li>
+        </ul>
+
+        <div class="sub"><h3>Coming soon</h3></div>
+        <p class="soon">EconQuest, LedgerQuest, Math Quest, ʻŌleloQuest, Cashflow, Derivatives 101, Nova Swarm, and Corvale.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="goals">
+    <div class="wrap grid">
+      <h2>Where I'm Headed</h2>
+      <div class="prose">
+        <p>My goal is to build a career in data science, finance, or actuarial science, ideally one that lets me use all three to help people make better decisions with uncertain information. I am majoring in Data Science and Finance with a minor in Actuarial Science at Oregon State, and what connects them is a single question: how do you reason well when you cannot know what happens next?</p>
+        <p>I already practice this outside of class. I trade options, which means constantly estimating probabilities and sizing risk, and I have published several iOS apps on the App Store on my own. Building them taught me to take a messy idea all the way to a working product that real people use.</p>
+        <p>When I did the job scavenger hunt and my skills self-reflection in this course, the postings that interested me kept asking for Python, SQL, statistics, and the ability to explain results to people who are not technical. I am building Python and statistics through my coursework, and communication is the skill I want to push hardest, which is a big reason I am building this portfolio.</p>
+        <p>My short-term goal is to land an internship this summer in data science, finance, or actuarial work so I can see which field I am best at and enjoy most. Until then I will keep applying, keep improving my data science skills, and keep building apps. Longer term, I want to be the person who can both build the model and explain it to the people relying on it.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="https://github.com/nicopetrides123-lgtm">GitHub</a>
+      <a href="https://www.linkedin.com/in/nicolas-petrides">LinkedIn</a>
+    </div>
+    <a href="/legal/">Privacy policies &amp; terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
